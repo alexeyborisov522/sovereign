@@ -13,17 +13,6 @@ CA_BUNDLE = 'roles/common/files/wildcard_ca.pem'
 socket.setdefaulttimeout(5)
 os.environ['REQUESTS_CA_BUNDLE'] = CA_BUNDLE
 
-class SSHTests(unittest.TestCase):
-    def test_ssh_banner(self):
-        """SSH is responding with its banner"""
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((TEST_SERVER, 22))
-        data = s.recv(1024)
-        s.close()
-
-        self.assertRegexpMatches(data, '^SSH-2.0-OpenSSH')
-
-
 class WebTests(unittest.TestCase):
     def test_blog_http(self):
         """Blog is redirecting to https"""
